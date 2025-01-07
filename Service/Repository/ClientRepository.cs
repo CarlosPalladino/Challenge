@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts
+namespace Service.Repository
 {
-    public class Class1
+    internal class ClientRepository
     {
     }
 }
