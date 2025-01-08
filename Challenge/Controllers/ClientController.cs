@@ -13,8 +13,6 @@ namespace Challenge.Controllers
         {
 
         }
-
-
         [HttpGet]
         public async Task GetClientById(int Id)
         {

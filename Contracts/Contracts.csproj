@@ -42,13 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ClientDto.cs" />
+    <Compile Include="Dto\Request\ClientRequest.cs" />
     <Compile Include="Exceptions\BadRequestException.cs" />
     <Compile Include="Middlewares\Middlewares.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="packages.config" />
+    <Folder Include="Dto\Response\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

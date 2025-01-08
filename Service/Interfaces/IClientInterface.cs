@@ -2,10 +2,9 @@
 
 namespace Service.Interfaces
 {
-    public class IClientInterface
+    public interface IClientInterface
     {
-
-        public async Task GetClient();
+        Task GetClient();
     }
 
 }

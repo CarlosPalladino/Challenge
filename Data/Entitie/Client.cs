@@ -19,25 +19,25 @@ namespace Data.Entitie
     {
         public void Configure(EntityTypeBuilder<Client> builder)
         {
-            builder.ToTable("Player");
+            builder.ToTable("Client");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.Name);
-            builder.Property(x => x.Name).HasColumnName("Name").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.LastName);
-            builder.Property(x => x.LastName).HasColumnName("LastName").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.Email);
-            builder.Property(x => x.Email).HasColumnName("Email").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.Cuit);
-            builder.Property(x => x.Cuit).HasColumnName("Cuit").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.Dni);
-            builder.Property(x => x.Dni).HasColumnName("Dni").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.Nacimiento);
-            builder.Property(x => x.Nacimiento).HasColumnName("Nacimiento").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.Dni);
-            builder.Property(x => x.Dni).HasColumnName("Dni").ValueGeneratedOnAdd().IsRequired();
-            builder.HasKey(x => x.Phone);
-            builder.Property(x => x.Phone).HasColumnName("Phone").ValueGeneratedOnAdd().IsRequired();
+
+            builder.Property(x => x.Name).HasColumnName("Name").IsRequired();
+
+            builder.Property(x => x.LastName).HasColumnName("LastName").IsRequired();
+
+            builder.Property(x => x.Email).HasColumnName("Email").IsRequired();
+
+            builder.Property(x => x.Cuit).HasColumnName("Cuit").IsRequired();
+
+            builder.Property(x => x.Dni).HasColumnName("Dni").IsRequired();
+
+            builder.Property(x => x.Nacimiento).HasColumnName("Nacimiento").IsRequired();
+
+            builder.Property(x => x.Dni).HasColumnName("Dni").IsRequired();
+
+            builder.Property(x => x.Phone).HasColumnName("Phone").IsRequired();
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Data.Context
         {
 
         }
+        public DbSet<Client> Client { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
