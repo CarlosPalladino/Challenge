@@ -29,15 +29,22 @@ public class ClientController : ControllerBase
         var getClientById = await _service.GetClientById(Id);
         return Ok(getClientById);
     }
+
     [HttpGet("name/{Name}")]
     public async Task<IActionResult> GetClientByName(string Name)
     {
         var getClientByName = await _service.SearchClient(Name);
         return Ok(getClientByName);
     }
+
     [HttpPost]
     public async Task<IActionResult> CreateClient([FromBody] ClientRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var newClient = await _service.InsertClient(request);
         return Ok("New client created");
     }
@@ -45,6 +52,11 @@ public class ClientController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateClient([FromBody] ClientDto request)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var updateClient = await _service.UpdateClient(request);
         return Ok("Client's information updated");
     }

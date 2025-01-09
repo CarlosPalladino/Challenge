@@ -1,4 +1,5 @@
 using Contract.Helpers;
+using Contracts.Middlewares.MiddlewaresService;
 using Data.Configuration;
 using Service.Interfaces;
 
@@ -15,6 +16,7 @@ builder.Services.AddAutoMapper(typeof(Mapper));
 builder.Services.AddChallengeDbContext(builder.Configuration);
 
 builder.Services.AddScoped<IClientInterface, ClientRepository>();
+builder.Services.AddScoped<IExceptionService, ExceptionService>();
 
 var app = builder.Build();
 

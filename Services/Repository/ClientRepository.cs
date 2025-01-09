@@ -16,28 +16,15 @@ public class ClientRepository : IClientInterface
         _context = context;
         _mapper = mapper;
     }
-
     public async Task<List<ClientDto>> GetAllClients()
     {
         var clients = await _context.Clients.ToListAsync();
         return _mapper.Map<List<ClientDto>>(clients);
     }
-
-    public async Task<ClientDto> GetClientById(int id)
-    {
-        var client = await _context.Clients
-            .FirstOrDefaultAsync(c => c.Id == id);
-
-        if (client == null)
-            throw new KeyNotFoundException($"Client with ID {id} not found.");
-
-        return _mapper.Map<ClientDto>(client);
-    }
-
     public async Task<ClientDto> InsertClient(ClientRequest request)
     {
         if (await ClientExists(request.Dni))
-            throw new InvalidOperationException($"Client with DNI {request.Dni} already exists.");
+            throw new BadRequestException("400 Bad Request", $"Client with DNI {request.Dni} already exists.");
 
         var newClient = _mapper.Map<Client>(request);
         await _context.Clients.AddAsync(newClient);
@@ -49,7 +36,7 @@ public class ClientRepository : IClientInterface
     {
         var existingClient = await _context.Clients.FirstOrDefaultAsync(c => c.Email.Equals(request.Email));
         if (existingClient == null)
-            throw new KeyNotFoundException($"Client with email {request.Email} not found.");
+            throw new BadRequestException("400 Bad Request", $"Client with email {request.Email} not found.");
 
         _mapper.Map(request, existingClient);
         _context.Clients.Update(existingClient);
@@ -63,15 +50,10 @@ public class ClientRepository : IClientInterface
         var clientToDelete = await _context.Clients.FirstOrDefaultAsync(c => c.Id == Id);
 
         if (clientToDelete == null)
-            throw new KeyNotFoundException($"Client with ID {Id} not found.");
+            throw new BadRequestException("400 Bad Request", $"Client with ID {Id} not found.");
 
         _context.Clients.Remove(clientToDelete);
         await _context.SaveChangesAsync();
-    }
-
-    private async Task<bool> ClientExists(long Dni)
-    {
-        return await _context.Clients.AnyAsync(c => c.Dni.Equals(Dni));
     }
 
     public async Task<ClientDto> SearchClient(string Name)
@@ -79,6 +61,26 @@ public class ClientRepository : IClientInterface
         var searchClient = await _context.Clients
             .Where(c => c.Name.Contains(Name) || c.Name.Equals(Name))
             .FirstOrDefaultAsync();
+
+        if (searchClient == null)
+            throw new BadRequestException("400 Bad Request", $"No client found with name {Name}.");
+
         return _mapper.Map<ClientDto>(searchClient);
+    }
+
+    public async Task<ClientDto> GetClientById(int id)
+    {
+        var client = await _context.Clients
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (client == null)
+            throw new BadRequestException("400 Bad Request", $"Client with ID {id} not found.");
+
+        return _mapper.Map<ClientDto>(client);
+    }
+
+    private async Task<bool> ClientExists(long Dni)
+    {
+        return await _context.Clients.AnyAsync(c => c.Dni.Equals(Dni));
     }
 }
