@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ChallengeContext))]
-    [Migration("20250108145050_Initial")]
-    partial class Initial
+    [Migration("20250109130607_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,8 +34,8 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Cuit")
-                        .HasColumnType("int")
+                    b.Property<long>("Cuit")
+                        .HasColumnType("bigint")
                         .HasColumnName("Cuit");
 
                     b.Property<int>("Dni")
@@ -49,7 +49,8 @@ namespace Data.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("LastName");
 
                     b.Property<DateTime>("Nacimiento")
@@ -58,7 +59,8 @@ namespace Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("Name");
 
                     b.Property<int>("Phone")

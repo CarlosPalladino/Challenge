@@ -1,5 +1,6 @@
 using Contract.Helpers;
 using Data.Configuration;
+using Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(Mapper));
+
+
 builder.Services.AddChallengeDbContext(builder.Configuration);
+
+builder.Services.AddScoped<IClientInterface, ClientRepository>();
+
 var app = builder.Build();
-//builder.Services.AddAutoMapper(typeof(MapperHelper));
 
 
 // Configure the HTTP request pipeline.
@@ -20,6 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 
 app.Run();

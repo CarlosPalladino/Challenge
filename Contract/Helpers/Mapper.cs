@@ -4,13 +4,12 @@ using Dtos.ClientDto;
 
 namespace Contract.Helpers
 {
-    public class MapperHelper : Profile
+    public class Mapper : Profile
     {
-        public MapperHelper()
+
+        public Mapper()
         {
             CreateMap<Client, ClientDto>();
-
-
         }
     }
 }

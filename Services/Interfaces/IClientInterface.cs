@@ -6,9 +6,9 @@ namespace Service.Interfaces
     public interface IClientInterface
     {
         Task<List<ClientDto>> GetAllClients();
-        Task<ClientDto> GetClientById(int id);
+        Task<ClientDto> GetClientById(int Id);
         Task<ClientDto> InsertClient(ClientRequest request);
-        //Task<ClientDto> UpdateClient(int id,ClientDto clientDto);
-        Task DeleteClient(long dni);
+        Task<ClientDto> UpdateClient(ClientRequest request);
+        Task DeleteClient(int Id);
     }
 }

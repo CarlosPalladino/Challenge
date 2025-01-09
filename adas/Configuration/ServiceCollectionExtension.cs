@@ -7,7 +7,6 @@ namespace Data.Configuration
 {
     public static class ServiceCollectionExtension
     {
-
         public static void AddChallengeDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var applicationOptions = new ApplicationOptions();
@@ -16,9 +15,6 @@ namespace Data.Configuration
             services.AddDbContext<ChallengeContext>(options =>
                 options.UseSqlServer(applicationOptions.ConnectionString));
         }
-
     }
-
-
-
 }
+    
