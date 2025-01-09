@@ -1,3 +1,4 @@
+using Contract.Helpers;
 using Data.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddChallengeDbContext(builder.Configuration);
 var app = builder.Build();
+builder.Services.AddAutoMapper(typeof(MapperHelper));
 
 
 // Configure the HTTP request pipeline.

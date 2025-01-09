@@ -45,6 +45,5 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ClientRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

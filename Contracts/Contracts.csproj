@@ -50,5 +50,11 @@
   <ItemGroup>
     <Folder Include="Dto\Response\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{0e87aeb8-6be3-417d-8458-376ee84ff536}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
