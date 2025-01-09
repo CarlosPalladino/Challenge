@@ -13,18 +13,14 @@ Se utiliza **AutoMapper** para mapear entre entidades y DTOs, y **NUnit** para r
 
 ## Principales Características
 
-- **CRUD de Clientes**: Permite realizar operaciones como obtener todos los clientes, buscar por ID, insertar, actualizar y eliminar.
-- **SoftDelete**: Al eliminar un cliente, este no se elimina físicamente de la base de datos. En su lugar, se marca como eliminado mediante la columna `SoftDeleted`.
-  - Clientes "eliminados" no aparecen en las listas normales.
-  - Existe un método para obtener todos los clientes, incluidos los eliminados.
-- **Testing Unitario**: Se implementaron tests para validar las operaciones de los servicios sin la necesidad de probar mediante endpoints.
+- **CRUD de Clientes**: Permite realizar operaciones como obtener todos los clientes, buscar por ID o que contenga el nombre , insertar, actualizar y eliminar.
+
 
 ## Tecnologías Utilizadas
 
-- **.NET 7**
+- **.NET 8**
 - **Entity Framework Core**
 - **AutoMapper**
-- **NUnit**
 
 
 ## Endpoints Principales
@@ -32,21 +28,24 @@ Se utiliza **AutoMapper** para mapear entre entidades y DTOs, y **NUnit** para r
 1. **GET** `/api/clients`  
    Obtiene todos los clientes activos.
 
-2. **GET** `/api/clients/{id}`  
+2 **GET** `/api/clients/{name}`  
+   Obtiene a los clientes que contenga su nombre.
+3. **GET** `/api/clients/{id}`  
    Obtiene un cliente específico por su ID.
 
-3. **POST** `/api/clients`  
+4. **POST** `/api/clients`  
    Inserta un nuevo cliente.
 
-4. **PUT** `/api/clients/{id}`  
+5. **PUT** `/api/clients/{id}`  
    Actualiza un cliente existente.
 
-5. **DELETE** `/api/clients/{dni}`  
+6. **DELETE** `/api/clients/{dni}`  
    Marca un cliente como eliminado (`SoftDelete`).
 
-## Cómo Ejecutar
+## Lo imcompleto
+ - Quedó por implementar
+   1**Validar la unicidad del campo ID**
+** Validar los datos**
+** Nombres, apellidos, CUIT, teléfono celular, email -> que sean obligatorios**
+** Que Fecha de nacimiento, Email y CUIT estén correctamente formateados **
 
-1. Clonar el repositorio.
-2. Configurar la conexión a la base de datos en `appsettings.json`.
-3. Ejecutar 
-4 -Generar la consulta deseada y comprar si funciona
