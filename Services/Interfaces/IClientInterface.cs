@@ -8,7 +8,7 @@ namespace Service.Interfaces
         Task<List<ClientDto>> GetAllClients();
         Task<ClientDto> GetClientById(int id);
         Task<ClientDto> InsertClient(ClientRequest request);
-        Task<ClientDto> UpdateClient(int id,ClientDto clientDto);
-        Task DeleteClient(int dni);
+        //Task<ClientDto> UpdateClient(int id,ClientDto clientDto);
+        Task DeleteClient(long dni);
     }
 }

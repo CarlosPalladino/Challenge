@@ -20,9 +20,7 @@ namespace Service.Repository
         public async Task<List<ClientDto>> GetAllClients()
         {
             var clients = await _context.Clients.ToListAsync();
-
             return _mapper.Map<List<ClientDto>>(clients);
-
         }
 
         public async Task<ClientDto> GetClientById(int id)
@@ -51,26 +49,23 @@ namespace Service.Repository
             return _mapper.Map<ClientDto>(newClient);
         }
 
-        public async Task<ClientDto> UpdateClient(int id, ClientDto clientDto)
+        //public async Task<ClientDto> UpdateClient(int id, ClientDto clientDto)
+        //{
+
+
+        //    var existingClient = await _context.Clients.Where(c => c.Dni.Equals(clientDto.Dni));
+
+        //    _mapper.Map(clientDto, existingClient);
+        //    await SaveChangesAsync();
+        //    return _mapper.Map<ClientDto>(existingClient);
+        //}
+
+        public async Task DeleteClient(long dni)
         {
-            var existingClient = await _context.Clients.FindAsync(id);
-            if (existingClient == null)
-                throw new Exception("Client not found");
-
-            _mapper.Map(clientDto, existingClient);
-            await SaveChangesAsync();
-            return _mapper.Map<ClientDto>(existingClient);
-        }
-
-        public async Task DeleteClient(int dni)
-        {
-            if (!await ClientExistAsync(dni))
-                throw new Exception("Client not found");
-
+         
             var clientToDelete = await _context.Clients.FirstOrDefaultAsync(c => c.Dni == dni);
             _context.Clients.Remove(clientToDelete);
             await SaveChangesAsync();
         }
-
     }
 }

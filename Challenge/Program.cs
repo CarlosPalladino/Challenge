@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddChallengeDbContext(builder.Configuration);
 var app = builder.Build();
-builder.Services.AddAutoMapper(typeof(MapperHelper));
+//builder.Services.AddAutoMapper(typeof(MapperHelper));
 
 
 // Configure the HTTP request pipeline.

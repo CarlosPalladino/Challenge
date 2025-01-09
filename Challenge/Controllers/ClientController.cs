@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Contracts.Dto.Request;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
@@ -12,38 +13,42 @@ namespace Challenge.Controllers
     {
         private readonly IClientInterface _service;
         private readonly Mapper _map;
-        public ClientController(IClientInterface service, Mapper mapper)
+        public ClientController(IClientInterface service)
         {
-            _map = mapper;
             _service = service;
         }
-
-
-
         [HttpGet]
-        public async Task GetAllClient()
+        public async Task<IActionResult> GetAllClient()
         {
-            //var getClients =
+            var getClients = await _service.GetAllClients();
+
+            return Ok(getClients);
         }
-        [HttpGet]
-        public async Task GetClientById(int Id)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetClientById(int Id)
         {
-
+            var getClientById = await _service.GetClientById(Id);
+            return Ok(GetClientById);
         }
         [HttpPost]
-        public async Task CreateClient()
+        public async Task<IActionResult> CreateClient(ClientRequest request)
         {
+            var newClient =  await _service.InsertClient(request);
 
+            return Ok("New client");
         }
-        [HttpPut]
-        public async Task UpdateClient()
-        {
+        //[HttpPut]
+        //public async Task<IActionResult> UpdateClient(ClientRequest request)
+        //{
+        //    var updateClient =await  _service.UpdateClient(request);
+        //    return Ok("Client's information changed");
 
-        }
-        [HttpDelete]
-        public async Task DeleteClient(int Id)
-        {
-
-        }
+        //}
+        //[HttpDelete]
+        //public async Task<IActionResult> DeleteClient(long dni)
+        //{
+        //    var deleteClient = await _service.DeleteClient(dni);
+        //    return Ok("the cliente was deleted succesfully");
+        //}
     }
 }
