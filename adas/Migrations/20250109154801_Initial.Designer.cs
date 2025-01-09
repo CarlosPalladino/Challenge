@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ChallengeContext))]
-    [Migration("20250109135858_SeedData")]
-    partial class SeedData
+    [Migration("20250109154801_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,8 +36,8 @@ namespace Data.Migrations
                     b.Property<long>("Cuit")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Dni")
-                        .HasColumnType("int");
+                    b.Property<long>("Dni")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -68,7 +68,7 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             Cuit = 20304050601L,
-                            Dni = 20304050,
+                            Dni = 20304050L,
                             Email = "maradona10@argentina.com",
                             LastName = "Maradona",
                             Nacimiento = new DateTime(1960, 10, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -79,7 +79,7 @@ namespace Data.Migrations
                         {
                             Id = 2,
                             Cuit = 20708090101L,
-                            Dni = 40708090,
+                            Dni = 40708090L,
                             Email = "messi10@argentina.com",
                             LastName = "Messi",
                             Nacimiento = new DateTime(1987, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -90,7 +90,7 @@ namespace Data.Migrations
                         {
                             Id = 3,
                             Cuit = 20333333401L,
-                            Dni = 30333333,
+                            Dni = 30333333L,
                             Email = "sabatini@argentina.com",
                             LastName = "Sabatini",
                             Nacimiento = new DateTime(1970, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -101,7 +101,7 @@ namespace Data.Migrations
                         {
                             Id = 4,
                             Cuit = 20123456701L,
-                            Dni = 10123456,
+                            Dni = 10123456L,
                             Email = "papa_francisco@vaticano.com",
                             LastName = "Bergoglio",
                             Nacimiento = new DateTime(1936, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -112,7 +112,7 @@ namespace Data.Migrations
                         {
                             Id = 5,
                             Cuit = 20567890101L,
-                            Dni = 50678901,
+                            Dni = 50678901L,
                             Email = "ginobili20@argentina.com",
                             LastName = "Ginóbili",
                             Nacimiento = new DateTime(1977, 7, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -123,7 +123,7 @@ namespace Data.Migrations
                         {
                             Id = 6,
                             Cuit = 20122334455L,
-                            Dni = 20122334,
+                            Dni = 20122334L,
                             Email = "pergolini@cqc.com",
                             LastName = "Pergolini",
                             Nacimiento = new DateTime(1964, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -134,7 +134,7 @@ namespace Data.Migrations
                         {
                             Id = 7,
                             Cuit = 20111223344L,
-                            Dni = 20111223,
+                            Dni = 20111223L,
                             Email = "francella@actor.com",
                             LastName = "Francella",
                             Nacimiento = new DateTime(1955, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -145,7 +145,7 @@ namespace Data.Migrations
                         {
                             Id = 8,
                             Cuit = 20444444401L,
-                            Dni = 40444444,
+                            Dni = 40444444L,
                             Email = "darin@actor.com",
                             LastName = "Darín",
                             Nacimiento = new DateTime(1957, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),

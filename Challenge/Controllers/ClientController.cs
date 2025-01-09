@@ -1,4 +1,5 @@
 ﻿using Contracts.Dto.Request;
+using Dtos.ClientDto;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
@@ -22,13 +23,18 @@ public class ClientController : ControllerBase
         return Ok(getClients);
     }
 
-    [HttpGet("{Id}")]
+    [HttpGet("id/{Id}")]
     public async Task<IActionResult> GetClientById(int Id)
     {
         var getClientById = await _service.GetClientById(Id);
         return Ok(getClientById);
     }
-
+    [HttpGet("name/{Name}")]
+    public async Task<IActionResult> GetClientByName(string Name)
+    {
+        var getClientByName = await _service.SearchClient(Name);
+        return Ok(getClientByName);
+    }
     [HttpPost]
     public async Task<IActionResult> CreateClient([FromBody] ClientRequest request)
     {
@@ -37,7 +43,7 @@ public class ClientController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateClient([FromBody] ClientRequest request)
+    public async Task<IActionResult> UpdateClient([FromBody] ClientDto request)
     {
         var updateClient = await _service.UpdateClient(request);
         return Ok("Client's information updated");

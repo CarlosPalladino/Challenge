@@ -45,11 +45,11 @@ public class ClientRepository : IClientInterface
         return _mapper.Map<ClientDto>(newClient);
     }
 
-    public async Task<ClientDto> UpdateClient(ClientRequest request)
+    public async Task<ClientDto> UpdateClient(ClientDto request)
     {
-        var existingClient = await _context.Clients.FirstOrDefaultAsync(c => c.Dni.Equals(request.Dni));
+        var existingClient = await _context.Clients.FirstOrDefaultAsync(c => c.Email.Equals(request.Email));
         if (existingClient == null)
-            throw new KeyNotFoundException($"Client with ID {request.Dni} not found.");
+            throw new KeyNotFoundException($"Client with email {request.Email} not found.");
 
         _mapper.Map(request, existingClient);
         _context.Clients.Update(existingClient);
@@ -72,5 +72,13 @@ public class ClientRepository : IClientInterface
     private async Task<bool> ClientExists(long Dni)
     {
         return await _context.Clients.AnyAsync(c => c.Dni.Equals(Dni));
+    }
+
+    public async Task<ClientDto> SearchClient(string Name)
+    {
+        var searchClient = await _context.Clients
+            .Where(c => c.Name.Contains(Name) || c.Name.Equals(Name))
+            .FirstOrDefaultAsync();
+        return _mapper.Map<ClientDto>(searchClient);
     }
 }
