@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Contract.Dto.Response;
 using Contracts.Dto.Request;
 using Contracts.Exceptions;
 using Data.Context;
@@ -17,10 +18,10 @@ public class ClientRepository : IClientInterface
         _context = context;
         _mapper = mapper;
     }
-    public async Task<List<ClientDto>> GetAllClients()
+    public async Task<List<ClientResponse>> GetAllClients()
     {
         var clients = await _context.Clients.ToListAsync();
-        return _mapper.Map<List<ClientDto>>(clients);
+        return _mapper.Map<List<ClientResponse>>(clients);
     }
     public async Task<ClientDto> InsertClient(ClientRequest request)
     {
@@ -57,7 +58,7 @@ public class ClientRepository : IClientInterface
         await _context.SaveChangesAsync();
     }
 
-    public async Task<ClientDto> SearchClient(string Name)
+    public async Task<ClientResponse> SearchClient(string Name)
     {
 
         var searchClient = await _context.Clients
@@ -67,10 +68,10 @@ public class ClientRepository : IClientInterface
         if (searchClient == null)
             throw new NotFoundException("404 Not Foud", $"No client found with name {Name}.");
 
-        return _mapper.Map<ClientDto>(searchClient);
+        return _mapper.Map<ClientResponse>(searchClient);
     }
 
-    public async Task<ClientDto> GetClientById(int id)
+    public async Task<ClientResponse> GetClientById(int id)
     {
         var client = await _context.Clients
             .FirstOrDefaultAsync(c => c.Id == id);
@@ -78,7 +79,7 @@ public class ClientRepository : IClientInterface
         if (client == null)
             throw new BadRequestException("400 Bad Request", $"Client with ID {id} not found.");
 
-        return _mapper.Map<ClientDto>(client);
+        return _mapper.Map<ClientResponse>(client);
     }
 
     private async Task<bool> ClientExists(long Dni)
