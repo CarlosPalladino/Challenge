@@ -15,7 +15,6 @@ public class ClientController : ControllerBase
     {
         _service = service;
     }
-
     [HttpGet]
     public async Task<IActionResult> GetAllClient()
     {
@@ -44,11 +43,9 @@ public class ClientController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-
         var newClient = await _service.InsertClient(request);
         return Ok("New client created");
     }
-
     [HttpPut]
     public async Task<IActionResult> UpdateClient([FromBody] ClientDto request)
     {
@@ -56,11 +53,9 @@ public class ClientController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-
         var updateClient = await _service.UpdateClient(request);
         return Ok("Client's information updated");
     }
-
     [HttpDelete("{Id}")]
     public async Task<IActionResult> DeleteClient(int Id)
     {

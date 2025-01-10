@@ -12,23 +12,23 @@ namespace Data.Entitie
         public int Id { get; set; }
 
         [Required(ErrorMessage = "El nombre es obligatorio")]
-        [StringLength(50, ErrorMessage = "El nombre no puede exceder los 50 caracteres")]
+        [RegularExpression(@"^[A-Za-z\s]{1,50}$", ErrorMessage = "El nombre solo puede contener letras y espacios y no puede exceder los 50 caracteres.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "El apellido es obligatorio")]
-        [StringLength(50, ErrorMessage = "El apellido no puede exceder los 50 caracteres")]
+        [RegularExpression(@"^[A-Za-z\s]{1,50}$", ErrorMessage = "El apellido solo puede contener letras y espacios y no puede exceder los 50 caracteres.")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "El email es obligatorio")]
-        [EmailAddress(ErrorMessage = "Formato de email inválido")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Formato de email inválido")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "El CUIT es obligatorio")]
-        [Range(20000000000, 20999999999, ErrorMessage = "Formato de CUIT inválido")]
+        [RegularExpression(@"^\d{11}$", ErrorMessage = "El formato de CUIT debe ser de 11 dígitos.")]
         public long Cuit { get; set; }
 
         [Required(ErrorMessage = "El DNI es obligatorio")]
-        [Range(10000000, 99999999, ErrorMessage = "Formato de DNI inválido")]
+        [RegularExpression(@"^\d{8}$", ErrorMessage = "El formato de DNI debe ser de 8 dígitos.")]
         public long Dni { get; set; }
 
         [Required(ErrorMessage = "La fecha de nacimiento es obligatoria")]
@@ -36,9 +36,10 @@ namespace Data.Entitie
         public DateTime Nacimiento { get; set; }
 
         [Required(ErrorMessage = "El teléfono es obligatorio")]
-        [Phone(ErrorMessage = "Formato de teléfono inválido")]
+        [RegularExpression(@"^\+?[1-9]\d{1,14}$", ErrorMessage = "Formato de teléfono inválido")]
         public int Phone { get; set; }
     }
+
 
     public class ClientConfig : IEntityTypeConfiguration<Client>
     {

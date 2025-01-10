@@ -16,12 +16,6 @@ namespace Contracts.Exceptions
             _detalle = detalle;
         }
 
-        public BadRequestException(string titulo, string detalle, List<(string, string)> errors)
-        {
-            _titulo = titulo;
-            _detalle = detalle;
-            _errors = errors;
-        }
 
         public string GetJsonDescription()
         {

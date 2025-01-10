@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Contracts.Dto.Request;
+using Contracts.Exceptions;
 using Data.Context;
 using Data.Entitie;
 using Dtos.ClientDto;
@@ -58,12 +59,13 @@ public class ClientRepository : IClientInterface
 
     public async Task<ClientDto> SearchClient(string Name)
     {
+
         var searchClient = await _context.Clients
             .Where(c => c.Name.Contains(Name) || c.Name.Equals(Name))
             .FirstOrDefaultAsync();
 
         if (searchClient == null)
-            throw new BadRequestException("400 Bad Request", $"No client found with name {Name}.");
+            throw new NotFoundException("404 Not Foud", $"No client found with name {Name}.");
 
         return _mapper.Map<ClientDto>(searchClient);
     }
@@ -83,4 +85,6 @@ public class ClientRepository : IClientInterface
     {
         return await _context.Clients.AnyAsync(c => c.Dni.Equals(Dni));
     }
+
+
 }

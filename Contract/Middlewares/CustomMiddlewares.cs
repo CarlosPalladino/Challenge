@@ -1,22 +1,39 @@
-﻿using Newtonsoft.Json;
+﻿using Contracts.Exceptions;
+using Contracts.Middlewares.MiddlewaresService;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
-public class BadRequestException : Exception
+public class CustomMiddleware
 {
-    // Constructor con un solo mensaje de error
-    public BadRequestException(string message) : base(message) { }
+    private readonly RequestDelegate _next;
+    private readonly ILogger<CustomMiddleware> _loger;
 
-    // Constructor con un mensaje y una descripción adicional
-    public BadRequestException(string message, string description) : base(message)
+    public CustomMiddleware(RequestDelegate next, ILogger<CustomMiddleware> loger)
     {
-        Description = description;
+        _next = next;
+        _loger = loger;
     }
 
-    // Propiedad para almacenar la descripción adicional
-    public string Description { get; }
-
-    // Método para obtener una representación en JSON
-    public string GetJsonDescription()
+    public async Task Invoke(HttpContext context, IExceptionService exceptionService)
     {
-        return JsonConvert.SerializeObject(new { error = Message, description = Description });
+        try
+        {
+            await _next(context);
+        }
+        catch (BadRequestException badRequestException)
+        {
+            await exceptionService.GetBadRequestExceptionResponseAsync(context, badRequestException);
+        }
+        catch (NotFoundException notFoundRequestException)
+        {
+            await exceptionService.GetNotFoundExceptionResponseAsync(context, notFoundRequestException);
+        }
+        catch
+        {
+            throw;
+        }
     }
+
 }
+
+
